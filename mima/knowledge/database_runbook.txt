@@ -1,0 +1,50 @@
+DATABASE RUNBOOK
+
+Overview:
+This runbook provides troubleshooting guidance for database-related incidents impacting applications, APIs, websites, and services.
+
+Common Symptoms:
+- Application timeouts
+- Slow response times
+- Database connection failures
+- Connection pool exhaustion
+- Unable to establish JDBC/ODBC connection
+- Increased API latency
+- User login failures
+- Checkout or transaction failures
+
+Initial Checks:
+1. Verify database health and availability.
+2. Check database CPU, memory, and storage utilization.
+3. Review active database alerts and monitoring dashboards.
+4. Check connection pool usage and exhaustion levels.
+5. Validate replication and clustering status.
+6. Confirm no recent database maintenance or failover activity.
+7. Review recent deployments or configuration changes.
+
+Common Root Causes:
+- Connection pool exhaustion
+- Database server resource saturation
+- Long-running or blocking queries
+- Deadlocks
+- Failed database failover
+- Network connectivity issues
+- Storage latency
+- Misconfigured application connection settings
+
+Known Workarounds:
+- Restart affected application services
+- Increase connection pool temporarily
+- Clear stuck sessions or blocking queries
+- Fail over to secondary database if available
+- Roll back recent deployments
+- Engage Database Support Team
+
+Suggested Teams:
+- Database Support
+- Application Support
+- Infrastructure Support
+- Cloud Platform Team
+
+Escalation Guidance:
+Engage the Database Support Team immediately if connection failures, database outages, replication failures, or severe performance degradation are confirmed.

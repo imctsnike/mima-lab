@@ -1,0 +1,9 @@
+Checkout outages are frequently caused by database saturation, connection pool exhaustion, API failures, or downstream payment service issues.
+ 
+Suggested teams:
+- Checkout Support
+- Database Support
+- Commerce Edge
+ 
+Known workaround:
+Restart affected application pods and validate database health.

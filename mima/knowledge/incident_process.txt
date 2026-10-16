@@ -1,0 +1,79 @@
+MAJOR INCIDENT MANAGEMENT PROCESS
+
+Overview:
+This document outlines the standard major incident management process used to investigate, coordinate, communicate, and resolve critical service disruptions.
+
+Incident Lifecycle:
+
+1. Identification
+- Receive user reports or alerts.
+- Validate symptoms and affected services.
+- Determine business impact.
+- Assess severity.
+
+2. Investigation
+- Gather evidence from monitoring tools.
+- Search for related incidents.
+- Review recent changes and deployments.
+- Check known problems and workarounds.
+- Identify impacted applications, services, regions, and users.
+
+3. Assignment
+- Identify service owner.
+- Identify responsible support teams.
+- Engage technical responders.
+- Establish collaboration channel if required.
+
+4. Communications
+- Publish Initial Communication.
+- Provide periodic updates.
+- Communicate business impacts.
+- Share estimated restoration time when available.
+
+5. Resolution
+- Implement workaround or fix.
+- Validate service restoration.
+- Confirm user impact has been mitigated.
+- Continue monitoring.
+
+6. Closure
+- Publish Resolved Communication.
+- Confirm business recovery.
+- Capture timeline of events.
+- Schedule Root Cause Analysis if required.
+
+Communication Guidelines:
+- Use facts only.
+- Avoid assumptions.
+- Clearly state impact.
+- Clearly state next actions.
+- Clearly identify responsible teams.
+- Provide confidence level when possible.
+
+Severity Indicators:
+
+High:
+- Widespread user impact
+- Revenue impact
+- Consumer-facing outage
+
+Medium:
+- Partial degradation
+- Limited user impact
+
+Low:
+- Minor issue
+- Workaround available
+
+Major Incident Roles:
+- Major Incident Manager (MIM)
+- Service Owner
+- Application Support Team
+- Infrastructure Team
+- Vendor Support Teams
+
+Success Criteria:
+- Service fully restored
+- Stakeholders informed
+- Monitoring confirms stability
+- Follow-up actions documented

@@ -1,0 +1,15 @@
+services:
+  mima:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      MIMA_DATA_DIR: /app/data
+    volumes:
+      - mima-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  mima-data:
