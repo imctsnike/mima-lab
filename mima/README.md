@@ -9,8 +9,7 @@ request, and monitors configured vendor status endpoints.
 
 - Slack Bolt `app_mention` event handling with replies kept in the originating
   Slack thread.
-- Hugging Face Inference API chat completions (choose a model available to your
-  Hugging Face account with chat-completion support).
+- Hugging Face Inference API text generation with `google/flan-t5-large`.
 - Persistent ChromaDB retrieval over `.txt` documents under `knowledge/`.
 - SQLite conversation history, separated by channel and thread.
 - Optional ServiceNow incident search and explicitly requested incident
@@ -39,12 +38,20 @@ Add these bot token scopes before installing/reinstalling:
 Copy `.env.example` to `.env` and set `SLACK_BOT_TOKEN` and
 `SLACK_SIGNING_SECRET`. Do not commit `.env`.
 
+## Deploy on Render
+
+Render does not automatically load your local `.env` file. In the Render
+service dashboard, open **Environment** and add `SLACK_BOT_TOKEN` and
+`SLACK_SIGNING_SECRET` with the values from your Slack app, then save and
+redeploy. Both are required for the service to start; the other integrations
+are optional.
+
 ## Configure integrations
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
 | `HF_TOKEN` | For AI answers | Hugging Face user access token |
-| `HF_MODEL` | No | Chat-completion model ID; defaults to `Qwen/Qwen2.5-7B-Instruct` |
+| `HF_MODEL` | No | Hugging Face model ID; defaults to `google/flan-t5-large` |
 | `SERVICENOW_URL` | For ServiceNow | Instance base URL, e.g. `https://example.service-now.com` |
 | `SERVICENOW_USER` | For ServiceNow | Service account username |
 | `SERVICENOW_PASSWORD` | For ServiceNow | Service account password |

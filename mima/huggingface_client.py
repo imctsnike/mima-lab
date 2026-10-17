@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import httpx
-from huggingface_hub import InferenceClient
-from huggingface_hub.utils import HfHubHTTPError
 
+print("MIMA HF VERSION 3")
+
+INFERENCE_API_BASE_URL = "https://api-inference.huggingface.co/models"
 
 class MimaServiceError(RuntimeError):
     pass
@@ -20,22 +21,38 @@ class HuggingFaceAssistant:
             raise MimaServiceError(
                 "Hugging Face is not configured. Set the HF_TOKEN environment variable."
             )
-        client = InferenceClient(
-            model=self.model,
-            token=self.token,
-            timeout=self.timeout,
+        endpoint = f"{INFERENCE_API_BASE_URL}/{self.model}"
+        print(f"Using model: {self.model}")
+        print(f"Using endpoint: {endpoint}")
+        prompt = "\n\n".join(
+            f"{message['role'].capitalize()}: {message['content']}"
+            for message in messages
         )
+        prompt += "\n\nAssistant:"
         try:
-            response = client.chat_completion(
-                messages=messages,
-                max_tokens=700,
-                temperature=0.2,
+            response = httpx.post(
+                endpoint,
+                headers={"Authorization": "Bearer " + self.token},
+                json={
+                    "inputs": prompt,
+                    "parameters": {"max_new_tokens": 700},
+                },
+                timeout=self.timeout,
             )
-        except (HfHubHTTPError, httpx.HTTPError) as error:
+            response.raise_for_status()
+            result = response.json()
+        except (httpx.HTTPError, ValueError) as error:
+            print(f"HF Error: {error}")
             raise MimaServiceError(f"Hugging Face inference failed: {error}") from error
-        if not response.choices or not response.choices[0].message.content:
+
+        if not isinstance(result, list) or not result:
             raise MimaServiceError("Hugging Face returned an empty answer.")
-        content = response.choices[0].message.content
-        if not isinstance(content, str) or not content.strip():
+        output = result[0]
+        generated_text = (
+            output.get("generated_text") if isinstance(output, dict) else None
+        )
+        if not isinstance(generated_text, str):
             raise MimaServiceError("Hugging Face returned an unsupported answer format.")
-        return content
+        if not generated_text.strip():
+            raise MimaServiceError("Hugging Face returned an empty answer.")
+        return generated_text

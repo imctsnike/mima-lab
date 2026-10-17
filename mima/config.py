@@ -65,7 +65,7 @@ class Settings:
             hf_token=os.getenv("HF_TOKEN", "").strip(),
             hf_model=os.getenv(
                 "HF_MODEL",
-                "Qwen/Qwen2.5-7B-Instruct",
+                "google/flan-t5-large",
             ).strip(),
             servicenow_url=os.getenv("SERVICENOW_URL", "").strip().rstrip("/"),
             servicenow_user=os.getenv("SERVICENOW_USER", "").strip(),

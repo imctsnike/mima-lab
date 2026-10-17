@@ -1,5 +1,10 @@
 from __future__ import annotations
 
+import os
+
+print("APP STARTING")
+print("CURRENT DIRECTORY:", os.getcwd())
+
 import logging
 import re
 from typing import Any
