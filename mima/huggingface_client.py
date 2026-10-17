@@ -22,8 +22,10 @@ class HuggingFaceAssistant:
                 "Hugging Face is not configured. Set the HF_TOKEN environment variable."
             )
         endpoint = f"{INFERENCE_API_BASE_URL}/{self.model}"
-        print(f"Using model: {self.model}")
-        print(f"Using endpoint: {endpoint}")
+        print("=" * 80)
+        print(f"MODEL: {self.model}")
+        print(f"ENDPOINT: {endpoint}")
+        print("=" * 80)
         prompt = "\n\n".join(
             f"{message['role'].capitalize()}: {message['content']}"
             for message in messages
@@ -42,7 +44,7 @@ class HuggingFaceAssistant:
             response.raise_for_status()
             result = response.json()
         except (httpx.HTTPError, ValueError) as error:
-            print(f"HF Error: {error}")
+            print(f"FULL ERROR: {repr(error)}")
             raise MimaServiceError(f"Hugging Face inference failed: {error}") from error
 
         if not isinstance(result, list) or not result:
